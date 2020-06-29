@@ -1,6 +1,7 @@
 import  React, { Component } from 'react';
 //import  React, { useState } from 'react'; //Part of functional component
 import './App.css';
+import Radium,{StyleRoot} from 'radium'
 import Person from './Person/Person';
 
 //Functional component
@@ -94,7 +95,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let person = null;
@@ -115,6 +120,10 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     const classes = [];
@@ -126,19 +135,21 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>Hi, I'm Pranay!!</h1>
-        <p className={classes.join(' ')}>This is really working!!</p>
-        <button 
-        style={style}
-        onClick={this.togglePersonHandler}>
-        {this.state.showPerson ? 'Hide Person' : 'Show Person'}</button>
-        {person}
-        <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm Pranay!!</h1>
+          <p className={classes.join(' ')}>This is really working!!</p>
+          <button 
+          style={style}
+          onClick={this.togglePersonHandler}>
+          {this.state.showPerson ? 'Hide Person' : 'Show Person'}</button>
+          {person}
+          <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
+        </div>
+        </StyleRoot>
     );
     ////return React.createElement('div',{className: 'App'},React.createElement('h1',null,'Hi, Does it works?'));
   }
 }
 
-export default App;
+export default Radium(App);
