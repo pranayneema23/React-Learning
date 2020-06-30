@@ -1,0 +1,190 @@
+########################React - The Complete Guide######################################
+####Introduction
+-A Javascript Library for building User Interfaces.
+-JS Library - JS driven app.
+-React use components to building User Interfaces.
+-Component helps us to make code manageable.
+-React component can be thought of as custom HTML element.
+-React DOM is to rendaring a component.
+-JSX has the requirement of only having one root element.
+-Use single render call is far most popular way of creating app.
+
+####Understand the folder structure
+-Dependencies : library/script  used in application.
+-scripts : trigger when we run npm start, npm build. IT optimized code and perform other operation like convert next gen JS features to vanila JS.
+-react-scripts : Package offering all the build workflow, development server, next gen. JS features.This has lots of other dependency 
+-react-script build : trigger when we execute npm build(when project are ready for production)
+-Manifest.json : Used for metadate for our app.
+-registerServiceWorker.js  : pre-cache our script and used for PWA(Progressive Web APP)
+-App.test.js : Used for unit testing of our app.
+-start : compile and optimiz our code
+-Public folder : A root folder which get server by the web server in the end.Should contain single index.html page for PWA.
+-For multipage application you need to use create-react-app multiple time.
+-scr : All the script files is placed here
+-div id='root' : Place where we mount out react application.
+
+####Understanding Component Basic
+-React is all about components(Custom HTML elements)
+-Typically, the react app have only one root component.
+-The render method is defined in Component.
+-The .JS extension is removed by build workflow.
+-The HTML type syntex you written is actually JSX and compiled it to valid JS in the end.
+
+
+####Understanding JSX
+-The JSX is converted into JSX by React we import on the top
+-createElement() takes at least 3 arguments:
+    1st: Element we want to render(Html or other react component).
+    2nd: Configuration(cssClass, style or other Configuration) which is a JS object or null
+    3rd: Children (what nested in this div)
+    and the infinite comma seprated elements. 
+
+####JSX Restriction
+-You can not use words which is JS literals.(like class)
+-JSX expression must have root element.
+
+####Creating a functional component
+-Best practices is componet Name(Or folder name where you capt component) should start with Capital letter.
+-Function name is lower case.
+-import your component with Upper case letter because react use lower case started word for default element
+    like div,h1 etc..
+
+###Working with component
+-Componente make code managable,configurable.
+-Use anytime,anywhere as much as you can.
+
+####Outputting dynamic content
+-use {single line statement, calling fxn, single line expression}
+
+####Working with props
+-One arguments by default passed by react (generally called props) which is an object with all the properties of the component.
+-Property is basiclly attribute you passed to component.
+-props.children gives the access of <Person>Child Content(Could be a normal content or other JSX or react component)</Person>
+-Change in prop trigger an UI update.
+
+####Understanding and using states
+-State is used when you don't want to get some information from outside but you want to have it inside a component.
+-Like change value on button click.
+-A special property you can define in any component which extends component named state.
+-State is managed from inside a component (use to manage component internal data).
+-If state property is changes it lead react to re-render our DOM or to update the DOM.
+-state is state you can't change the name l ike we  can do with props.
+-state is only available in class which extend component and access via this.state.
+
+#######Difference between props and state
+
+####Handling events with method
+-Don't use () when Handling event like onClick.If you do React execute the function when it render element on DOM.
+-You only want to pass a refrence.
+
+
+####Manipulating the State
+-If you want to access this.state always use ES6 Arrow syntex otherwise you may not able to access state property.
+-DO NOT directly change the state property.
+-Use special method setState() otherwise you may get warning message.
+-This method help to get React know about this update and update the DOM.
+-Also, setState does not change complete array, it will only update the part that you mention in state.
+ 
+ ####Using the useState() hook for state Manipulation
+ -hook generaly starts with use****
+ -useState return an array with exactly two element and always two elements.
+ -The first element we get back will always be our current state.
+ -The second element in state array will always be a function that allows us to update this state,
+ such that React is aware of it and will re-render the required component.
+ -Remember that you useState 2nd returend value that is function, not merge the data with previous object.
+ -Again, insted of manually merg, use setState multiple time.
+ -You can have as many useState in functional component.
+
+ ####Stateless vs Stateful Component
+ -StateFull component is a component that manages state,no matter it's using the useState hook or class-based approach with the state property.
+ -Stateless are also called dumb Component or presentational component.
+ -Statefull component are also called smart or container component.
+ -Always use less number of statefull component. otherwise it will make your code spaghetti.
+
+ ####Passing Method refrence between Componentes
+ -You can pass method also as a props.
+ -This help us to call a method which might changes the state in another component which dont have the direct access of the state.
+ -There is a two way to pass the data to the handler
+ -1st way is to use .bind() and passing this which control 'this' in handler function -> bind(this).
+ -bind(this,'Max','Pranay') other then 'this' all are argument list that passed to handler function
+ -2nd way is to use ES6 arrow function syntex, and pssed the parameter in that.
+ -The recommended way is to use .bind();
+
+ ####Adding two way binding
+-
+ 
+
+ ####Adding styling with stylesheet
+ -The webpack enable us to import .css file in .JS file.
+ -2 Ways of styling
+    -Create css files
+    -Inline style sheet(Use power of JSX,create style object and paased it to style attribute in JSX)
+    -The inline way have some limitation but can overcome some of them.
+
+ ####Rendering contain conditionaly
+ -Yoy can only use simple statement and not the block statement like if(){}, insted use ternary operator as part of dynamic syntex.
+ 
+ ####Handling dynamic content "The Javascript way"
+ -Use variable and then assign JSX in that variable based on condition.
+
+ ####Update state immutably
+ -Use slice insted of splice.(Or spread operator)
+
+ ####Lists & Keys
+ -The 'Key' prop is important property we should add whrn rendering the data.
+ -Its actually a default property react expects to find on an element no matter if it's a custom component or default
+ html element which you render through a list.
+ -This key property helps react update the list efficiently.
+ -When we delete the list, behind the seen react needs to find out what it actually needs to adjust in the overall DOM.
+ -Key property allows react to keep track of individual element so that it has clear property it can compare between the different element 
+ to find out which element change and which didn't.
+
+ ####Flixible List
+ -Always use id for list.
+ -Always use immutable way to change object.
+
+ ####Adding and using radium
+ -Radium is popular package for react which allows us to use inline style with pseudo selector and media queries.
+ -npm install --save radium
+ -Radium(App) is higher order component
+ -Radium works with both functional and class based component.
+
+ ####Using Radium with media-queries
+ -Transforming selectors like media queries or other animations with keyframes,we need to wrap the entire application in a
+ special component provided by Radium called StyleRoot.
+ -Wrap your whole application in <StyleRoot></StyleRoot>.
+
+ ####Introduction Styled Component
+ -Another popular library for styling react component is styled-components.
+ -styles-component.com
+ -This use the concept of tagged templet literal for vanilla JS.
+ -You need to pass some text between back ticks and then it will passed to that element.Ex- styled.button``
+ -import styled from 'styled-components'
+ -const StyledDiv = styled.div`
+    width: 60%;
+    margin: 16px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+    text-align: center;
+
+    @media(min-width: 500px) {
+        width: 450px;
+    }`
+-Behind the seen styled.xyz always return a react component.
+
+####More on styled component
+-Under the hood the style apply as classes and not the inline way.styled-component provides the class name to styles and then apply that class name the HTML elements.
+-Remember you write actual regular CSS syntex under back ticks.(No camel style, no quotation marks)
+-Add &hover wen use hover.
+
+####Styled componenet and Dynamic Styled
+-You can add any property to styled component and then use that using props.
+-You can embeded the JS in templet literal using ${props.alt ? 'red' : 'green'}
+
+####Working with CSS modules
+-Sometime its good to write styles which only apply to specific component and not the complete part.
+-Having CSS scope to certain file or scope to certain componenet and still lives inside of CSS as file.
+-This also have good IDE support.
+-To achieve this we have a concept of CSS Modules.
+-Run npm run eject and it will eject from the under the hood configuration and give access to underlying webpack config files.
