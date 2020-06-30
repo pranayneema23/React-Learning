@@ -1,7 +1,6 @@
 import  React, { Component } from 'react';
 //import  React, { useState } from 'react'; //Part of functional component
-import './App.css';
-import Radium,{StyleRoot} from 'radium'
+import classes from'./App.css';
 import Person from './Person/Person';
 
 //Functional component
@@ -89,7 +88,7 @@ class App extends Component {
 
   render() {
 
-    const style = {
+    /*const style = {
       backgroundColor: 'green',
       color: 'white',
       font: 'inherit',
@@ -100,9 +99,10 @@ class App extends Component {
         backgroundColor: 'lightgreen',
         color: 'black'
       }
-    };
+    };*/
 
     let person = null;
+    let btnClass = '';
 
     if(this.state.showPerson){
       person = (
@@ -119,37 +119,31 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      btnClass = classes.Red;
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if(this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I'm Pranay!!</h1>
-          <p className={classes.join(' ')}>This is really working!!</p>
+          <p className={assignedClasses.join(' ')}>This is really working!!</p>
           <button 
-          style={style}
+          className={btnClass}
           onClick={this.togglePersonHandler}>
           {this.state.showPerson ? 'Hide Person' : 'Show Person'}</button>
           {person}
           <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
         </div>
-        </StyleRoot>
     );
     ////return React.createElement('div',{className: 'App'},React.createElement('h1',null,'Hi, Does it works?'));
   }
 }
 
-export default Radium(App);
+export default App;
