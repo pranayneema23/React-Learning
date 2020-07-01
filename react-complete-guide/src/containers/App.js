@@ -1,7 +1,7 @@
 import  React, { Component } from 'react';
 //import  React, { useState } from 'react'; //Part of functional component
 import classes from'./App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 //Functional component
 /*const app = props => {
