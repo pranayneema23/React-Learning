@@ -1,43 +1,7 @@
 import  React, { Component } from 'react';
-//import  React, { useState } from 'react'; //Part of functional component
 import classes from'./App.css';
-import Person from '../components/Persons/Person/Person';
-
-//Functional component
-/*const app = props => {
-  const [personsState, setPersonsState] = useState({
-    persons: [
-      {name: 'Pranay', age: 22},
-      {name: 'Ritika', age: 19},
-      {name: 'Stephanie', age: 27}
-    ],
-  });
-
-  const [otherObject,setOtherState] = useState({otherObject: [{id: 1, Job: 'Techi'}]})
-
-  const switchNameHandler = () => {
-    setPersonsState({
-      persons: [
-        {name: 'Pranay', age: 22},
-        {name: 'Ritika', age: 20},
-        {name: 'Stephanie', age: 28}
-      ]
-    })
-   }
-
-  return (
-    <div className="App">
-    <h1>Hi, I'm Pranay!!</h1>
-    <button onClick={switchNameHandler}>Switch Name</button>
-    <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
-    <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My Hobbies : Sleeping </Person>
-    <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
-    <p>Id :{otherObject.otherObject[0].id} Job :{otherObject.otherObject[0].Job}</p>
-  </div>
-  );
-}
-
-export default app;*/
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../Cockpit/Cockpit'
 
 //Class based, smart, stateful component
 class App extends Component {
@@ -88,56 +52,21 @@ class App extends Component {
 
   render() {
 
-    /*const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };*/
-
     let person = null;
-    let btnClass = '';
-
+    
     if(this.state.showPerson){
-      person = (
-        <div>
-          {this.state.persons.map((person,index) => {
-            return <Person 
-            name={person.name} 
-            age={person.age}
-            click={() => this.deletePersonalHandler(index)}
-            changed={(event) => this.nameChangeHandler(event,person.id)}
-            key={person.id}
-            />
-          })}
-        </div>
-      );
-
-      btnClass = classes.Red;
-    }
-
-    const assignedClasses = [];
-    if(this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if(this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
+      person = <Persons 
+          persons={this.state.persons}
+          clicked={this.deletePersonalHandler}
+          changed={this.nameChangeHandler}/>;
     }
 
     return (
         <div className={classes.App}>
-          <h1>Hi, I'm Pranay!!</h1>
-          <p className={assignedClasses.join(' ')}>This is really working!!</p>
-          <button 
-          className={btnClass}
-          onClick={this.togglePersonHandler}>
-          {this.state.showPerson ? 'Hide Person' : 'Show Person'}</button>
+          <Cockpit
+            showPersons={this.state.showPerson}
+            persons={this.state.persons}
+            clicked={this.togglePersonHandler}/>
           {person}
           <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
         </div>
@@ -147,3 +76,40 @@ class App extends Component {
 }
 
 export default App;
+
+//Functional component
+//import  React, { useState } from 'react'; //Part of functional component
+/*const app = props => {
+  const [personsState, setPersonsState] = useState({
+    persons: [
+      {name: 'Pranay', age: 22},
+      {name: 'Ritika', age: 19},
+      {name: 'Stephanie', age: 27}
+    ],
+  });
+
+  const [otherObject,setOtherState] = useState({otherObject: [{id: 1, Job: 'Techi'}]})
+
+  const switchNameHandler = () => {
+    setPersonsState({
+      persons: [
+        {name: 'Pranay', age: 22},
+        {name: 'Ritika', age: 20},
+        {name: 'Stephanie', age: 28}
+      ]
+    })
+   }
+
+  return (
+    <div className="App">
+    <h1>Hi, I'm Pranay!!</h1>
+    <button onClick={switchNameHandler}>Switch Name</button>
+    <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
+    <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My Hobbies : Sleeping </Person>
+    <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
+    <p>Id :{otherObject.otherObject[0].id} Job :{otherObject.otherObject[0].Job}</p>
+  </div>
+  );
+}
+
+export default app;*/
