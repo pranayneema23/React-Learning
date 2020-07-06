@@ -6,10 +6,11 @@ import classes from './Person.css';
 //when use by class use this.props
 const person = (props) => {
     const style = {
-        '@media (min-width: 500px)': {
+        '@media (minWidth: 500px)': {
             width: '450px'
         }
     }
+    console.log('[Person.js] rendering...');
     return (
         <div className={classes.Person} style={style}>
             <p onClick={props.click}>I'm a {props.name} and I'm {props.age} year's old!</p>
