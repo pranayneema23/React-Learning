@@ -28,9 +28,10 @@ class App extends Component {
     return state;
   }
 
-  componentWillMount() {
-    console.log('[App.js] componentWillMount');
-  }
+  //Supported only by older version of React
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount');
+  // }
 
   //Allow us to make an HTTP request
   componentDidMount() {
