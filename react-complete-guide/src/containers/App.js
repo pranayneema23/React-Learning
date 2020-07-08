@@ -5,12 +5,9 @@ import Cockpit from '../Cockpit/Cockpit'
 
 //Class based, smart, stateful component
 class App extends Component {
-
   constructor(props) {
     super(props);
-    console.log('[App.js] constructor');
-    //You can initilize your state here also
-    //this.state = initlize state
+    console.log('[App.js] constructor')
   }
 
   state = {
@@ -21,30 +18,6 @@ class App extends Component {
     ],
     otherObject: [{id: 1, Job: 'Techi'}],
     showPerson: false
-  }
-
-  static getDerivedStateFromProps(props,state){
-    console.log('[App.js] getDerivedStateFromProps', props);
-    return state;
-  }
-
-  //Supported only by older version of React
-  // componentWillMount() {
-  //   console.log('[App.js] componentWillMount');
-  // }
-
-  //Allow us to make an HTTP request
-  componentDidMount() {
-    console.log('[App.js] componentDidMount');
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[App.js] shouldComponentUpdate');
-    return true;
-  }
-
-  componentDidUpdate() {
-    console.log('[App.js] componentDidUpdate');
   }
 
   switchNameHandler = (newName) => {
@@ -83,9 +56,7 @@ class App extends Component {
   }
 
   render() {
-    //Not the real dom gets re-render but the virtual dom is re-render
-    //And compare it with previous dom and then update the changed element
-    console.log('[App.js] render')
+
     let person = null;
     
     if(this.state.showPerson){
@@ -98,7 +69,6 @@ class App extends Component {
     return (
         <div className={classes.App}>
           <Cockpit
-            title={this.props.appTitle}
             showPersons={this.state.showPerson}
             persons={this.state.persons}
             clicked={this.togglePersonHandler}/>
