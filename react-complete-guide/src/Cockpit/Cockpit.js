@@ -12,6 +12,7 @@ const cockpit = (props) => {
     },1000);
   }, []);
 
+  //Run when persons props changed
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     //Http request...
