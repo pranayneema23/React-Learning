@@ -5,10 +5,10 @@ class Persons extends Component {
 
   //Use to initilize the state based on props you're getting
   //Sync State to Props
-  static getDerivedStateFromProps(props,state) {
-    console.log('[Persons.js] getDerivedStateFromProps');
-    return state;
-  }
+  // static getDerivedStateFromProps(props,state) {
+  //   console.log('[Persons.js] getDerivedStateFromProps');
+  //   return state;
+  // }
 
   //Supported by legacy react
   // componentWillReceiveProps(props) {
