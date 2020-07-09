@@ -17,7 +17,8 @@ class App extends Component {
       {id: 3,name: 'Stephanie', age: 27}
     ],
     otherObject: [{id: 1, Job: 'Techi'}],
-    showPerson: false
+    showPerson: false,
+    showCockpit : true
   }
 
   switchNameHandler = (newName) => {
@@ -68,11 +69,13 @@ class App extends Component {
 
     return (
         <div className={classes.App}>
+          <button onClick= {() => {this.setState({showCockpit: false})}}>Remove Cockpit</button>
+          {this.state.showCockpit ? 
           <Cockpit
-            title = {this.props.appTitle}
-            showPersons={this.state.showPerson}
-            persons={this.state.persons}
-            clicked={this.togglePersonHandler}/>
+          title = {this.props.appTitle}
+          showPersons={this.state.showPerson}
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler}/> : null}
           {person}
           <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
         </div>
