@@ -7,10 +7,11 @@ const cockpit = (props) => {
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     //Http request...
-    setTimeout(() => {
+   const timer = setTimeout(() => {
       alert('Saved data to cloud!');
     },1000);
   return () => {
+    clearTimeout(timer);
     console.log('[Cockpit.js] Some cleanup work in useEffect');
   }
   }
@@ -24,13 +25,13 @@ const cockpit = (props) => {
   })
 
   //Run when persons props changed
-  useEffect(() => {
-    console.log('[Cockpit.js] useEffect');
-    //Http request...
-    setTimeout(() => {
-      alert('Saved data to cloud!');
-    },1000);
-  }, [props.persons]);
+  // useEffect(() => {
+  //   console.log('[Cockpit.js] useEffect');
+  //   //Http request...
+  //   setTimeout(() => {
+  //     alert('Saved data to cloud!');
+  //   },1000);
+  // }, [props.persons]);
 
   //useEffect() 
 
