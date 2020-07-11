@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Person from './Person/Person'
 
-class Persons extends Component {
+class Persons extends PureComponent {
 
   //Use to initilize the state based on props you're getting
   //Sync State to Props
@@ -18,10 +18,13 @@ class Persons extends Component {
   //Can use to cancel the updating process(Use carefully)
   //Use for performance optimization
   //You should have to return either rue or false
-  shouldComponentUpdate(nextProps,nextState) {
-    console.log('[Persons.js] shouldComponentUpdate');
-    return true;
-  }
+  // shouldComponentUpdate(nextProps,nextState) {
+  //   console.log('[Persons.js] shouldComponentUpdate');
+  //   if(nextProps.persons !== this.props.persons)
+  //     return true;
+  //   else
+  //     return false;
+  // }
 
   //Last min dom operations-get last scroll position
   //Data package
