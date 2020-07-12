@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 //import Radium from 'radium';
+import Auxiliary from '../../../hoc/Auxiliary'
 import classes from './Person.css';
 //ES 6 Syntex
 //Functional, stateless, presentational, dumb components.
@@ -13,11 +14,13 @@ class Person extends Component {
             }
         }
         return (
-            <div className={classes.Person} style={style}>
+            // <div className={classes.Person} style={style}>
+            <Auxiliary>
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} year's old!</p>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name}></input>
-            </div>
+            {/* </div> */}
+            </Auxiliary>
         );
     }
 }
