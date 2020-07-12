@@ -1,8 +1,9 @@
 import  React, { Component } from 'react';
 import classes from'./App.css';
 import Persons from '../components/Persons/Persons';
-import Cockpit from '../Cockpit/Cockpit'
-import WithClass from '../hoc/WithClass'
+import Cockpit from '../Cockpit/Cockpit';
+import withClass from '../hoc/withClass';
+import Auxiliary from '../hoc/Auxiliary';
 
 //Class based, smart, stateful component
 class App extends Component {
@@ -69,7 +70,7 @@ class App extends Component {
     }
 
     return (
-        <WithClass classes={classes.App}>
+        <Auxiliary>
           <button onClick= {() => {this.setState({showCockpit: false})}}>Remove Cockpit</button>
           {this.state.showCockpit ? 
           <Cockpit
@@ -79,13 +80,13 @@ class App extends Component {
           clicked={this.togglePersonHandler}/> : null}
           {person}
           <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
-        </WithClass>
+        </Auxiliary>
     );
     ////return React.createElement('div',{className: 'App'},React.createElement('h1',null,'Hi, Does it works?'));
   }
 }
 
-export default App;
+export default withClass(App,classes.App);
 
 //Functional component
 //import  React, { useState } from 'react'; //Part of functional component
