@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 //import Radium from 'radium';
 import Auxiliary from '../../../hoc/Auxiliary'
+import withClass from '../../../hoc/withClass'
 import classes from './Person.css';
 //ES 6 Syntex
 //Functional, stateless, presentational, dumb components.
@@ -25,4 +26,4 @@ class Person extends Component {
     }
 }
 
-export default Person; 
+export default withClass(Person, classes.Person); 
