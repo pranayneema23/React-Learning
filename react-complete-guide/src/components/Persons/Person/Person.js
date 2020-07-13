@@ -7,6 +7,14 @@ import classes from './Person.css';
 //Functional, stateless, presentational, dumb components.
 //when use by class use this.props
 class Person extends Component {
+    constructor(props) {
+        super(props)
+        this.inputElementRef = React.createRef();
+    }
+    componentDidMount() {
+        //this.inputElement.focus();
+        this.inputElementRef.current.focus();
+    }
     render() {
         console.log('[Person.js] rendering...');
         const style = {
@@ -19,7 +27,13 @@ class Person extends Component {
             <Auxiliary>
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} year's old!</p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name}></input>
+                <input 
+                    type="text" 
+                    //ref={(inputEl) => {this.inputElement = inputEl}}
+                    ref = {this.inputElementRef}
+                    onChange={this.props.changed} 
+                    value={this.props.name}>
+                </input>
             {/* </div> */}
             </Auxiliary>
         );
