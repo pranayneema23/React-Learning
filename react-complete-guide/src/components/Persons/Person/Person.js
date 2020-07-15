@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import Auxiliary from '../../../hoc/Auxiliary'
 import withClass from '../../../hoc/withClass'
 import classes from './Person.css';
+import AuthContext from '../../../context/auth-context';
 //ES 6 Syntex
 //Functional, stateless, presentational, dumb components.
 //when use by class use this.props
@@ -25,6 +26,11 @@ class Person extends Component {
         return (
             // <div className={classes.Person} style={style}>
             <Auxiliary>
+                <AuthContext.Consumer>
+                    {
+                        context => context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>
+                    }
+                </AuthContext.Consumer>
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} year's old!</p>
                 <p>{this.props.children}</p>
                 <input 

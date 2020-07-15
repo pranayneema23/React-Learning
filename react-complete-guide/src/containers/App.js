@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Auxiliary from '../hoc/Auxiliary';
+import AuthContext from '../context/auth-context'; 
 
 //Class based, smart, stateful component
 class App extends Component {
@@ -21,7 +22,8 @@ class App extends Component {
     otherObject: [{id: 1, Job: 'Techi'}],
     showPerson: false,
     showCockpit : true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated : false
   }
 
   switchNameHandler = (newName) => {
@@ -62,6 +64,10 @@ class App extends Component {
     this.setState({showPerson: !toggleState})
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  }
+
   render() {
 
     let person = null;
@@ -76,13 +82,21 @@ class App extends Component {
     return (
         <Auxiliary>
           <button onClick= {() => {this.setState({showCockpit: false})}}>Remove Cockpit</button>
-          {this.state.showCockpit ? 
-          <Cockpit
-          title = {this.props.appTitle}
-          showPersons={this.state.showPerson}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler}/> : null}
-          {person}
+          <AuthContext.Provider 
+            value={{
+              authenticated: this.state.authenticated,
+              login :this.loginHandler
+            }}>
+            {this.state.showCockpit ? 
+            <Cockpit
+            title = {this.props.appTitle}
+            showPersons={this.state.showPerson}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler}
+            login={this.loginHandler}
+            /> : null}
+            {person}
+            </AuthContext.Provider>
           <p>Id :{this.state.otherObject[0].id} Job :{this.state.otherObject[0].Job}</p>
         </Auxiliary>
     );
