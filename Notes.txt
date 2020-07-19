@@ -32,7 +32,7 @@
 
 
 ####Understanding JSX
--The JSX is converted into JSX by React we import on the top
+-The JSX is converted into JS by React we import on the top
 -createElement() takes at least 3 arguments:
     1st: Element we want to render(Html or other react component).
     2nd: Configuration(cssClass, style or other Configuration) which is a JS object or null
@@ -188,3 +188,120 @@
 -This also have good IDE support.
 -To achieve this we have a concept of CSS Modules.
 -Run npm run eject and it will eject from the under the hood configuration and give access to underlying webpack config files.
+
+####Error Boundry Concept(React 16+)
+
+####Component lifeycle creation
+constructor()
+-Setup state
+-Default ES6 class Feature
+-Should called super props,if you use constructor in code.
+-Use  for basic initial work like initilize state.
+-Don't cause side-effect (HHT request or storing something in your local storage of browser or sendinf analytics to google analytics)
+
+####Component Update Lifecycle (for props Changes)
+-Trigger by props or state changes
+
+getDerivedStateFromProps()
+-Statix method
+-Whenever your props changes for your class-based component, you can sink your state to them.
+-Don't cause ant side-effect. 
+
+render()
+-prepare & sstructure your JSX code.
+
+Render child components
+-If you use any component in render() method then those component also goes with this lifecycle.
+
+componentDidMount()
+-Cause side-effects
+-Don't update the state(Don't usw setState())
+
+**setState() merge the new state with previous one.
+
+####Using useEffect() in Functional component
+-Second mos important hooks after useState.
+-useEffect combineds the functionality of all these class-based lifecycle hook in one react hook (i.e useEffect).
+-useEffect take a function and that function run for every render cycle.
+//It is like componentDidMount and componentDidUpdate combined in one effect
+
+####Controlling the useEffect() Behavior
+-You can use as many useEffect you want.
+-Pass 2nd argument to useEffect as array of dependency fields.
+-componentDidMount - useEffect with empty array
+-If you dont pass any parameter useEffect called in every update cycle.
+
+####Cleanup with lifecycle hooks and useEffect()
+-componentWillUnmount - use to do some cleanup works.(This will un just right before the component is removed)
+-if you are using useEffect() - add a return statement and return annonaymous function.
+	-This anonymous function is run BEFORE the main useEffect function run, but AFTER the (first) render cycle.
+
+####shouldComponentUpdate()
+-You can use this to optimize the rerendaring.
+-For functional component you have React.memo(cockpit);
+
+####When not to use shouldComponentUpdate
+-When child component depend on parent component.
+-When child component get input from parent component. 
+-If you want to check for all props changes then also should not use shouldComponentUpdate.
+    -In this case you exetend PureComponent insted of Component.
+    -The PureComponet already conatin shouldComponentUpdate with all the props checks.
+
+####How react updates the DOM
+-React maintain 2 virtual DOM, Old Virtual DOM and Re-rendered Virtual DOM and these are faster then real DOM.
+-Virtual DOM simply is a DOM representation in JS.
+-React makes comparision b/w old and re-rendered DOM and if difference found it will onl update the elements
+in real DOM which have differences.
+
+
+####Rendering Adjacent rendering element.
+-The root element that we are returning should be one single element.
+-NOTE : React does allow us to return an array of Adjacent element as long as all the items in there have a key,
+and that key is required so that React efficiently update the reorder these elements.
+-There is one more approach to do this.
+    You can create a wrapping component that does not render any actual HTML code but that simply is there
+    to fulfill React's requirement of having a wrapping component. 
+-HOC(Higher Order Component) component that wrap other components.
+-children is a special poperty that simply outputs whatevwe gets entered between the opening and closing tag of this component.
+
+####Using React.Fragment
+-In react 16.2, there is built-in aux component.
+-Use <React.Fragment></React.Fragment>
+
+####HOC Introduction
+-You have a component that wraps other component that adds something to it, that could be styling, 
+that could be additional HTML structure arount it or could also be some logic.
+-You can also create HOC using normal JS function with someadditional parameters.
+-If HOC just need to change some HTML or CSS styles then use the 1st way.
+-If you have some behind the scenes logic, some JS code that handle error or sends analytics data or anything else
+then use 2nd way.
+
+####Passing unknown props
+-use spread operator {...props} to use props in WrappedComponent.
+
+####Setting State correctly
+-Whenever your setState changes depends on pervious props,
+the recommended way is to use this.setState(prevState,props) and use prevState.
+-***IMP: If you are using this.state.xyz to access previos xyz value, behind the scenes,
+set state does not immediately trigger an update of the the state of this component in a re-render cycles.
+
+####Using ref (References)
+-You can use ref keyword with any JSX element including your component.
+-ref take input function.
+-Another way is to use constructor and there use React.createRef() 
+-For functional component you have hooks called useRef
+
+####Understanding Props chain problem
+-You want to sand some data, states or props from component A at the top to component D at the very bottom,
+Where the component B and c in between don't really care about it.
+-Use context to overcome this problem.
+
+####Using the Context API
+-Context is globally available object.
+-You can use the auth class as a component and it should wrap all those componenet where you will access context object.
+
+####contextType and useContext()
+--contextType is static react property used in class.
+-useContext() is hooks used in functional component.
+-context API is all about managing data across componenet without the need to pass data around the props.
+-contextAPI makes redux easy to understand.
